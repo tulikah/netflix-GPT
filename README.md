@@ -1,7 +1,8 @@
 # Netflix GPT App
  - Scaffolded create-react-app
  - Configured Tailwindcss
- - 
+ - Header
+ - Login form
 
 
 # Features
