@@ -3,6 +3,16 @@
  - Configured Tailwindcss
  - Header
  - Login form
+ - Form Validation
+ - useRef hook
+ - Setup firebase
+ - Deploy app hosted on firebase 
+ - Authentication
+ - Create sign up user account
+ - Created redux store and slice
+ - Sign In Sign Out with login profile
+ - Logic for adding, updating, removing user
+ - Start with browse page
 
 
 # Features

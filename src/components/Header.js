@@ -1,12 +1,32 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
+import { removeUser } from '../redux/userSlice';
+
 
 const Header = () => {
+
+    const navigate = useNavigate();
+    const user = useSelector((store) => store.user)
+    const dispatch = useDispatch();
+
     return (
 
-            <div className="absolute bg-gradient-to-b from-black w-">
-                <img className="h-[100px]  mt-[5px] ml-[20px] " alt="logo" src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png' />
+        <div className="absolute bg-gradient-to-b from-black w-full flex justify-between">
+            <img className="h-[100px]  mt-[5px] ml-[20px] " alt="logo" src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png' />
 
-            </div>
+            { user &&
+                <div className="flex">
+                    <img alt="user-logo"
+                        src="https://occ-0-472-448.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABUcrlRM8xyfkeGhiHqMFbXm9Fu-GwxdUMvjjlox3gnVq0BOeram_lFujgH17JFQ3H4_egJmrav0rdoUcSag5RXS9qSBfz9FgSw.png?r=bd7"
+                        className="w-10 h-10 m-7"
+                    />
+                    <button className="p-3 text-white" onClick={ () => {navigate('/'); dispatch(removeUser()) }}>Sign Out</button>
+                </div>
+
+            }
+
+        </div>
 
 
     )
