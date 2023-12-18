@@ -1,14 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { removeUser } from '../redux/userSlice';
-
+import { removeUser, addUser } from '../redux/userSlice';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../utils/firebase';
 
 const Header = () => {
 
     const navigate = useNavigate();
     const user = useSelector((store) => store.user)
+    console.log('user', user);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+       const authSubs = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const { uid, email, name, displayName, photoUrl } = user;
+
+                dispatch(addUser({
+                    username: email,
+                    name: name,
+                    displayName: displayName,
+                    photoUrl: photoUrl
+                }))
+                navigate('/browse');
+            } else {
+                dispatch(removeUser());
+                navigate('/');
+            }
+        })
+        return () => authSubs();
+    }, [])
+
+    const handleSignout = () => {
+        signOut(auth).then(() => {
+            dispatch(removeUser())
+        }).catch((error) => {
+            navigate('/error');
+        });
+
+
+
+    }
 
     return (
 
@@ -21,7 +54,7 @@ const Header = () => {
                         src="https://occ-0-472-448.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABUcrlRM8xyfkeGhiHqMFbXm9Fu-GwxdUMvjjlox3gnVq0BOeram_lFujgH17JFQ3H4_egJmrav0rdoUcSag5RXS9qSBfz9FgSw.png?r=bd7"
                         className="w-10 h-10 m-7"
                     />
-                    <button className="p-3 text-white" onClick={ () => {navigate('/'); dispatch(removeUser()) }}>Sign Out</button>
+                    <button className="p-3 text-white" onClick={ () => handleSignout() }>Sign Out</button>
                 </div>
 
             }

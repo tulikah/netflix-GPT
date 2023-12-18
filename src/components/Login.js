@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { validateEmail } from '../utils/validate';
-import  Header  from './Header';
+import Header from './Header';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,21 +34,17 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;
-                    dispatch(addUser({
-                        'name': fullName.current.value,
-                        'username': email.current.value,
-                        'password': pwd.current.value,
-                        'displayName': fullName.current.value,
-                        'photoURL': "https://example.com/jane-q-user/profile.jpg"
-                    }))
                     updateProfile(auth.currentUser, {
                         displayName: fullName.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
-                      }).then(() => {
-                        navigate("/browse");
-                      }).catch((error) => {
+                    }).then(() => {
+                        dispatch(addUser({
+                            'displayName': fullName.current.value,
+                            'photoURL': "https://example.com/jane-q-user/profile.jpg"
+                        }))
+                    }).catch((error) => {
                         // An error occurred
                         // ...
-                      });
+                    });
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -66,19 +62,12 @@ const Login = () => {
                     const user = userCredential.user;
                     console.log(user);
                     const currentUser = updateUserVal;
-                    navigate("/browse");
-                    // if(currentUser.username === email.current.value) {
-                    //     dispatch(updateUser({
-                    //         ['new-name']: 'New User'
-                    //     }))
-              
-                    // } else {
-                    //     navigate("/");
-                    // }
-
-
-
-
+                    dispatch(addUser({
+                        'username': email.current.value,
+                        'name': fullName.current.value,
+                        'displayName': fullName.current.value,
+                        'photoUrl': 'https://example.com/jane-q-user/profile.jpg'
+                    }))
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -91,7 +80,7 @@ const Login = () => {
 
     return (
         <div>
-                 <Header />
+            <Header />
             <div className="flex justify-center items-center">
                 <img className="" alt="background" src="https://assets.nflxext.com/ffe/siteui/vlv3/ca6a7616-0acb-4bc5-be25-c4deef0419a7/4feb9207-c556-4619-91c1-810dc9c5a290/US-en-20231211-popsignuptwoweeks-perspective_alpha_website_large.jpg" />
                 <form className="h-[500px] w-[450px] absolute bg-black rounded-lg bg-opacity-80 p-[60px]" onSubmit={ (e) => e.preventDefault() }>
