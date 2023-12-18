@@ -4,8 +4,9 @@ import Header from './Header';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser, updateUser } from '../redux/userSlice';
+import { addUser } from '../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { BG_IMG } from '../utils/constants';
 
 
 const Login = () => {
@@ -15,8 +16,8 @@ const Login = () => {
     const pwd = useRef(null);
     const fullName = useRef(null);
     const dispatch = useDispatch();
-    const updateUserVal = useSelector((store) => store.user);
-    const navigate = useNavigate();
+    // const updateUserVal = useSelector((store) => store.user);
+
 
     const toggleSignInForm = () => {
         setSignIn(!signIn)
@@ -59,9 +60,9 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, pwd.current.value)
                 .then((userCredential) => {
                     // Signed in 
-                    const user = userCredential.user;
-                    console.log(user);
-                    const currentUser = updateUserVal;
+                    // const user = userCredential.user;
+                    // console.log(user);
+
                     dispatch(addUser({
                         'username': email.current.value,
                         'name': fullName.current.value,
@@ -82,7 +83,7 @@ const Login = () => {
         <div>
             <Header />
             <div className="flex justify-center items-center">
-                <img className="" alt="background" src="https://assets.nflxext.com/ffe/siteui/vlv3/ca6a7616-0acb-4bc5-be25-c4deef0419a7/4feb9207-c556-4619-91c1-810dc9c5a290/US-en-20231211-popsignuptwoweeks-perspective_alpha_website_large.jpg" />
+                <img className="" alt="background" src={BG_IMG} />
                 <form className="h-[500px] w-[450px] absolute bg-black rounded-lg bg-opacity-80 p-[60px]" onSubmit={ (e) => e.preventDefault() }>
                     <h1 className="text-[#fff] mb-[30px] ml-5 font-medium text-2xl">{ signIn ? 'Sign In' : 'Sign Up' }</h1>
                     <div>

@@ -19,24 +19,38 @@
     - Bugfix: You cannot call main route inside the same component where you decared the router.
         - Add your main logic in the Header since the header component is present everywhere in the app.
         - Or move the router setup to a different component
- - onAuthStateChanged() is in the header that runs only once but the header          component renders many times. So we need to unsubscribe the hook. This also acts as an event listener.
+ - onAuthStateChanged() is in the header that runs only once but the header component renders many times. So we need to unsubscribe the hook. This also acts as an event listener.
+ - Constants file -> add all hardcoded values
+ - Register TMDB API and create an app -> get access to the key token
+ - Get data from the TMDB movies list API (Movies List => Now Playing in API Reference Tab)
+ - Created a custom hook to get all movies instead of calling in Browse component
+ - Fetched all the now playing movies using a custom hook
+ - Used TMDB to get list  of youtube videos (Under movies => vidoes)
+ - Get the data which has "type" as "Trailer"
+ - Add a new reducer in the movie slice to store the trailer info
+ - Get the iframe of youtube video
+ - Save the trailer info in the store. Subscribe to the store to get the trailer id and display the video
+ - Using aspect video in css to make the trailer screen size
+ - Embedd video and autoplay it
+ - Tailwind classes to make main-container look amazing
 
 
 # Features
  - Log In/Sign UP 
     - Sign Up form
     - Redirect to browser page
- - Browser Page
+  - Browse page design:
     - Header
         - Logo
         - Sign in button
         - Account info
-    - Main Movie
-        - Movie Trailer
-            - Trailer in background
-            - Title & Description
-            - Movie Suggestions
-                - Suggestion list * N based on the category
+    - MainContainer
+        - BackgroundVideo
+                - Two Buttons
+                - VideoTitle
+    - MoviesListContainer
+        - CategoryContainer * n
+            - MovieCard * n
  - Netflix GPT
     - Search Bar
     - Movie Suggestions List

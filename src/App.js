@@ -8,7 +8,7 @@ import store from './redux/store';
 function App() {
   return (
     <Provider store={store}>
-    <div className="font-bold text-red-600">
+    <div className="font-bold">
       <Body />
     </div>
     </Provider>

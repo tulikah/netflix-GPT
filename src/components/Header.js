@@ -4,12 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeUser, addUser } from '../redux/userSlice';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../utils/firebase';
+import { LOGO_IMG } from '../utils/constants';
 
 const Header = () => {
 
     const navigate = useNavigate();
     const user = useSelector((store) => store.user)
-    console.log('user', user);
+    // console.log('user', user);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -51,7 +52,7 @@ const Header = () => {
             { user &&
                 <div className="flex">
                     <img alt="user-logo"
-                        src="https://occ-0-472-448.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABUcrlRM8xyfkeGhiHqMFbXm9Fu-GwxdUMvjjlox3gnVq0BOeram_lFujgH17JFQ3H4_egJmrav0rdoUcSag5RXS9qSBfz9FgSw.png?r=bd7"
+                        src={LOGO_IMG}
                         className="w-10 h-10 m-7"
                     />
                     <button className="p-3 text-white" onClick={ () => handleSignout() }>Sign Out</button>
