@@ -87,9 +87,9 @@ const Login = () => {
                 <form className="h-[500px] w-[450px] absolute bg-black rounded-lg bg-opacity-80 p-[60px]" onSubmit={ (e) => e.preventDefault() }>
                     <h1 className="text-[#fff] mb-[30px] ml-5 font-medium text-2xl">{ signIn ? 'Sign In' : 'Sign Up' }</h1>
                     <div>
-                        { !signIn && (<input className="h-[50px] w-[320px] bg-blackshade m-3 p-5 rounded md:backdrop-filter-none" placeholder="Full Name" ref={ fullName } />) }
-                        <input className="h-[50px] w-[320px] bg-blackshade m-3 p-5 rounded md:backdrop-filter-none text-white" placeholder="Email or phone number" ref={ email } />
-                        <input className="h-[50px] w-[320px] bg-blackshade m-3 p-5 rounded text-white" placeholder="Password" ref={ pwd } />
+                        { !signIn && (<input className="h-[50px] w-[320px] text-gray bg-blackshade m-3 p-5 rounded md:backdrop-filter-none" placeholder="Full Name" ref={ fullName } />) }
+                        <input className="h-[50px] w-[320px] bg-blackshade m-3 p-5 rounded md:backdrop-filter-none text-gray" placeholder="Email or phone number" ref={ email } />
+                        <input className="h-[50px] w-[320px] bg-blackshade m-3 p-5 rounded text-gray" placeholder="Password" ref={ pwd } />
                         <p className="text-red-600 m-3 text-sm font-light">{ errorMess !== null && errorMess } </p>
                         <button className="h-[50px] w-[320px] bg-red-700 rounded text-white ml-3 mt-10" onClick={ handleOnClick }>{ signIn ? 'Sign In' : 'Sign Up' }</button>
                         <p className="text-white m-3 text-sm font-light cursor-pointer" onClick={ toggleSignInForm }>{ signIn ? 'New to Netflix? Sign Up' : 'Already, registered? Sign In' }</p>

@@ -12,7 +12,7 @@ const MainContainer = () => {
     console.log('getMovie', mainmovie);
 
     return (
-        <div>
+        <div className="overflow-x-hidden">
             <VideoTitle title={ original_title } desc={ overview } />
             <VideoBackground id={ id } />
 
